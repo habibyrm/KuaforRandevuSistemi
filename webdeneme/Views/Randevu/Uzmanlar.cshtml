@@ -1,0 +1,10 @@
+﻿<h2>Uzmanlar</h2>
+<ul>
+    @foreach (var uzman in Model)
+    {
+        <li>
+            @uzman.AdSoyad
+            <a asp-action="RandevuAl" asp-route-uzmanId="@uzman.Id" asp-route-hizmetId="@ViewData["HizmetId"]">Randevu Al</a>
+        </li>
+    }
+</ul>

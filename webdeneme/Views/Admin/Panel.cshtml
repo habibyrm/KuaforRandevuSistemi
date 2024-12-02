@@ -1,0 +1,4 @@
+﻿@model IEnumerable<AdminRapor>                                      
+<h2>Admin Paneli</h2>
+<p>Toplam Gelir: @Model.Sum(x => x.ToplamGelir) ₺</p>
+<a asp-action="Calisanlar">Çalışanları Yönet</a>
