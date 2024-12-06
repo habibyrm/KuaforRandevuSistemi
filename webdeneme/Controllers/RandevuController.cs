@@ -21,20 +21,37 @@ namespace webdeneme.Controllers
 
         public IActionResult Hizmetler()
         {
+            if (!KullaniciGirisYapmisMi())
+            {
+                return RedirectToAction("GirisYap", "Musteri");
+            }
+
             var hizmetler = _veritabani.Islemler.ToList();
             return View(hizmetler);
         }
 
+
         public IActionResult Uzmanlar(int hizmetId)
         {
+            if (!KullaniciGirisYapmisMi())
+            {
+                return RedirectToAction("GirisYap", "Musteri");
+            }
+
             var uzmanlar = _veritabani.Calisanlar
                 .Where(u => u.Beceriler.Contains(hizmetId.ToString()) && u.MusaitMi)
                 .ToList();
             return View(uzmanlar);
         }
 
+
         public IActionResult RandevuAl(int uzmanId, int hizmetId)
         {
+            if (!KullaniciGirisYapmisMi())
+            {
+                return RedirectToAction("GirisYap", "Musteri");
+            }
+
             var uzman = _veritabani.Calisanlar.Find(uzmanId);
             var hizmet = _veritabani.Islemler.Find(hizmetId);
 
@@ -51,9 +68,15 @@ namespace webdeneme.Controllers
             });
         }
 
+
         [HttpPost]
         public IActionResult RandevuOlustur(Randevu randevu)
         {
+            if (!KullaniciGirisYapmisMi())
+            {
+                return RedirectToAction("GirisYap", "Musteri");
+            }
+
             if (ModelState.IsValid)
             {
                 randevu.MusteriId = int.Parse(HttpContext.Session.GetString("KullaniciId"));
@@ -64,8 +87,14 @@ namespace webdeneme.Controllers
             return View(randevu);
         }
 
+
         public IActionResult Randevularim()
         {
+            if (!KullaniciGirisYapmisMi())
+            {
+                return RedirectToAction("GirisYap", "Musteri");
+            }
+
             var kullaniciId = int.Parse(HttpContext.Session.GetString("KullaniciId"));
             var randevular = _veritabani.Randevular
                 .Include(r => r.Islem)
@@ -74,5 +103,6 @@ namespace webdeneme.Controllers
                 .ToList();
             return View(randevular);
         }
+
     }
 }

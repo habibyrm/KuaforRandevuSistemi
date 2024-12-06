@@ -35,9 +35,8 @@ namespace webdeneme.Controllers
                 _veritabani.Kullanicilar.Add(musteri);
                 _veritabani.SaveChanges();
 
-                // Kayıt işlemi başarılı mesajı
                 ViewBag.Basari = "Kayıt işlemi başarılı!";
-                return View(); // Giriş yap ekranına yönlendirme yapılmıyor
+                return View();
             }
 
             ViewBag.Hata = "Geçersiz giriş bilgileri, lütfen tekrar deneyin.";
@@ -59,9 +58,8 @@ namespace webdeneme.Controllers
                 HttpContext.Session.SetString("KullaniciId", kullanici.Id.ToString());
                 HttpContext.Session.SetString("AdminMi", kullanici.AdminMi.ToString());
 
-                // Hoşgeldiniz mesajı
-                ViewBag.Hosgeldiniz = $"Hoşgeldiniz, {kullanici.AdSoyad}!";
-                return View("Index"); // Hoşgeldiniz mesajıyla birlikte ana sayfada kalır
+                // Giriş başarılıysa HomeController'daki Index metoduna yönlendir
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.Hata = "Hatalı giriş! Lütfen bilgilerinizi kontrol edin.";

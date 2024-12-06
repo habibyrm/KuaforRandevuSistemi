@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Randevu Formu";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randevu Formu</title>
+</head>
+<body>
+    <h1>Randevu Al</h1>
+    <form asp-action="Kaydet" method="post">
+        <label for="Tarih">Tarih:</label>
+        <input type="date" id="Tarih" name="Tarih" required><br><br>
+        <label for="Saat">Saat:</label>
+        <input type="time" id="Saat" name="Saat" required><br><br>
+        <button type="submit">Randevu Al</button>
+    </form>
+</body>
+</html>

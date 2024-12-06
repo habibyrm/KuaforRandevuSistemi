@@ -1,8 +1,11 @@
 ﻿@model webdeneme.Models.Kullanici
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kayıt Ol</title>
+    <title>Giriş Yap</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
     <style>
         /* Genel Sayfa Ayarları */
@@ -15,49 +18,9 @@
             min-height: 100vh;
         }
 
-        /* Navigasyon Çubuğu */
-        .navbar {
-            width: 100%;
-            background-color: #ffffff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-            .navbar .logo {
-                font-size: 20px;
-                font-weight: bold;
-                color: #4CAF50;
-                text-decoration: none;
-            }
-
-            .navbar .menu {
-                list-style: none;
-                display: flex;
-                gap: 20px;
-                margin: 0;
-                padding: 0;
-            }
-
-                .navbar .menu a {
-                    text-decoration: none;
-                    color: #4CAF50;
-                    font-size: 14px;
-                    transition: color 0.3s;
-                }
-
-                    .navbar .menu a:hover {
-                        color: #43A047;
-                    }
-
         /* Form Konteyneri */
         .container {
-            flex: 1; /* Sayfanın geri kalanını kapla */
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -71,12 +34,12 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-        .form label{
+
+            .form label {
                 color: #4CAF50;
                 font-size: 18px;
-        }
+            }
 
-            /* Form Elemanları */
             .form input {
                 font-family: 'Roboto', sans-serif;
                 outline: 0;
@@ -121,30 +84,41 @@
                     font-weight: bold;
                 }
 
-        /* Footer */
-        footer {
-            background-color: #ffffff;
-            text-align: center;
-            padding: 10px 0;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-            color: #4CAF50;
+        .alert {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid green;
+            background-color: #dff0d8;
+            color: green;
+            border-radius: 5px;
         }
 
-            footer a {
-                text-decoration: none;
-                color: #4CAF50;
-            }
+        .error {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid red;
+            background-color: #f2dede;
+            color: red;
+            border-radius: 5px;
+        }
     </style>
 </head>
-<div class="giris">
-    <div class="form">
-        <form asp-action="GirisYap" method="post">
-            <label><b>GİRİŞ</b></label><br />
-            <br />
-            <input type="email" name="Email" placeholder="E-posta" required />
-            <input type="password" name="Sifre" placeholder="Şifre" required />
-            <button type="submit">Giriş Yap</button>
-            <p class="mesaj">Üye Değil Misin? <a asp-action="KayitOl">Hesap Oluştur</a></p>
-        </form>
+<body>
+    <div class="container">
+        <div class="form">
+            @if (ViewBag.Hata != null)
+            {
+                <div class="error">@ViewBag.Hata</div>
+            }
+            <form asp-action="GirisYap" method="post">
+                <label><b>GİRİŞ</b></label><br />
+                <br />
+                <input type="email" name="Email" placeholder="E-posta" required />
+                <input type="password" name="Sifre" placeholder="Şifre" required />
+                <button type="submit">Giriş Yap</button>
+                <p class="mesaj">Üye Değil Misin? <a asp-action="KayitOl">Hesap Oluştur</a></p>
+            </form>
+        </div>
     </div>
-</div>
+</body>
+</html>
